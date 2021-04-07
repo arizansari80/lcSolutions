@@ -1,2 +1,2 @@
-# lcSolutons
+# lcSolutions
 Solution to LC problems.
