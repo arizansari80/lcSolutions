@@ -3,7 +3,7 @@ package com.ariz.lcsolutions;
 import java.util.HashMap;
 
 public class LongestSubstringWithoutRepeatingCharacters {
-	public static void main(String[] args) {
+	public static void mainFunc(String[] args) {
 		System.out.println(lengthOfLongestSubstring("abcdefghijklmnopqrsguvwxyzabcdeftl1234567890@#?!-_+=*/\\[]{}e"));
 		System.out.println(lengthOfLongestSubstring(""));
 		System.out.println(lengthOfLongestSubstring("au"));

@@ -1,7 +1,7 @@
 package com.ariz.lcsolutions;
 
 public class LongestPalindromicSubstring {
-	public static void main(String[] args) {
+	public static void mainFunc(String[] args) {
 		String lP = longestPalindromic("abbc");
 		System.out.println(lP);
 		System.out.println(lP.length());

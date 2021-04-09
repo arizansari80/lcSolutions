@@ -9,7 +9,7 @@ class ListNode {
 }
 
 public class AddTwoNumbers {
-	public static void main(String[] args) {		
+	public static void mainFunc(String[] args) {		
 		ListNode l1RootS = null, l1RootE = null;
 		ListNode l2RootS = null, l2RootE = null;
 
