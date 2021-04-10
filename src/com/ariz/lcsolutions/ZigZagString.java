@@ -1,43 +1,57 @@
 package com.ariz.lcsolutions;
 
+import java.util.HashSet;
+
 public class ZigZagString {
+	private static int nextIndex(final int cr,final int lastIndex, final int secondLastIndex, final int totalRow, final int incr) {
+		if (cr == 0 || cr == totalRow - 1)
+			return lastIndex + incr;
+		return secondLastIndex + incr;	
+	}
+	
 	public static String zigZagConvert(final String s, final int numRows) {
-		int n = s.length(),r = numRows;
-		if (r == 1)
+		if (numRows >= s.length())
 			return s;
-		char[][] ch = new char[r][n];
-		int ni = 2 * (r - 1);
-		int[][] iter = new int[2][ni];
-		for (int i = 0; i < r; i++)
-			for (int j = 0; j < n; j++) 
-				ch[i][j] = ' ';
-		for (int i = 0; i < r; i++) {
-			iter[0][i] = i;
-			if (i == 0)
-				iter[1][i] = 1;
-			else
-				iter[1][i] = 0;
-		}
-		int z = r - 1;
-		for (int i = r; i < ni; i++) {
-			iter[0][i] = --z;
-			iter[1][i] = 1;
-		}
-		
-		int j = 0, c = -1;
-		for (int i = 0; i < n; i++) {
-			c += iter[1][j];
-			ch[iter[0][j]][c] = s.charAt(i);
-			j++;
-			if (j == ni)
-				j = 0;
-		}
+		if (numRows == 1)
+			return s;
+		int incr = 2 * (numRows - 1), n = s.length();
 		String retVal = "";
-		for (int i = 0; i < r; i++)
-			for (int k = 0; k <= c; k++)
-				if (ch[i][k] != ' ')
-					retVal += ch[i][k];
-		
+		int decr = numRows - 1;
+		int index = -1;
+		for (int i = 0; i < numRows; i++) {
+			int lastIndex = i;
+			int secondLastIndex = lastIndex;
+			int counter = 0;
+			try {
+				retVal += s.charAt(lastIndex);
+			} catch (StringIndexOutOfBoundsException e) {
+				break;
+			}
+			while (lastIndex < n) {
+				if (i == 0 || i == numRows - 1) {
+					lastIndex = nextIndex(i,lastIndex,-1,numRows,incr);
+					if (lastIndex < n)
+						retVal += s.charAt(lastIndex);
+					continue;
+				}
+				if (counter == 0) {
+					index = secondLastIndex + (2 * (decr));
+					if (index < n)						
+						retVal += s.charAt(index);
+					secondLastIndex = lastIndex;
+					lastIndex = index;
+					counter++;
+					continue;
+				}
+				index = nextIndex(i,lastIndex,secondLastIndex,numRows,incr);
+				if (index < n)
+					retVal += s.charAt(index);
+				secondLastIndex = lastIndex;
+				lastIndex = index;
+				counter++;
+			}
+			decr--;
+		}
 		return retVal;
 	}
 }
